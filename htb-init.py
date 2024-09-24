@@ -38,6 +38,7 @@ def create_dirs() -> None:
     create_dir(f'/work/ctf/htb/{ARGS["name"]}/scans/gobuster')
     create_dir(f'/work/ctf/htb/{ARGS["name"]}/scans/ffuf')
     create_dir(f'/work/ctf/htb/{ARGS["name"]}/scans/cme')
+    create_dir(f'/work/ctf/htb/{ARGS["name"]}/scans/enum4linux')
     create_dir(f'/work/ctf/htb/{ARGS["name"]}/loot')
     create_dir(f'/work/ctf/htb/{ARGS["name"]}/expl')
     create_dir(f'/work/ctf/htb/{ARGS["name"]}/sandbox')
