@@ -5,6 +5,7 @@ import os, argparse, validators
 PARSER = argparse.ArgumentParser()
 PARSER.add_argument("-n", "--name", required=True, help="CTF name")
 PARSER.add_argument("-i", "--ip", required=True, help="Host IP")
+PARSER.add_argument("-t", "--type", required=False, default="Machines", help="Host IP")
 ARGS = vars(PARSER.parse_args())
 
 # Add more in future
@@ -27,25 +28,36 @@ def create_dir(dir) -> None:
         exit(1)
 
 
-# Create all required dirs
-def create_dirs() -> None:
+def create_directory_structure() -> None:
+    # Base directory
+    base = f'/work/ctf/htb/{ARGS["type"]}'
+
+    #
+    # Create dirs
+    #
     create_dir('/work')
     create_dir('/work/ctf')
     create_dir('/work/ctf/htb')
-    create_dir('/work/ctf/htb/Machines')
-    create_dir(f'/work/ctf/htb/Machines/{ARGS["name"]}')
-    create_dir(f'/work/ctf/htb/Machines/{ARGS["name"]}/scans')
-    create_dir(f'/work/ctf/htb/Machines/{ARGS["name"]}/scans/nmap')
-    create_dir(f'/work/ctf/htb/Machines/{ARGS["name"]}/scans/gobuster')
-    create_dir(f'/work/ctf/htb/Machines/{ARGS["name"]}/scans/ffuf')
-    create_dir(f'/work/ctf/htb/Machines/{ARGS["name"]}/scans/cme')
-    create_dir(f'/work/ctf/htb/Machines/{ARGS["name"]}/scans/nxc')
-    create_dir(f'/work/ctf/htb/Machines/{ARGS["name"]}/scans/enum4linux')
-    create_dir(f'/work/ctf/htb/Machines/{ARGS["name"]}/scans/ldapsearch')
-    create_dir(f'/work/ctf/htb/Machines/{ARGS["name"]}/loot')
-    create_dir(f'/work/ctf/htb/Machines/{ARGS["name"]}/expl')
-    create_dir(f'/work/ctf/htb/Machines/{ARGS["name"]}/sandbox')
-    create_dir(f'/work/ctf/htb/Machines/{ARGS["name"]}/www')
+    create_dir(f'{base}')
+    create_dir(f'{base}/{ARGS["name"]}')
+    create_dir(f'{base}/{ARGS["name"]}/scans')
+    create_dir(f'{base}/{ARGS["name"]}/scans/nmap')
+    create_dir(f'{base}/{ARGS["name"]}/scans/gobuster')
+    create_dir(f'{base}/{ARGS["name"]}/scans/ffuf')
+    create_dir(f'{base}/{ARGS["name"]}/scans/cme')
+    create_dir(f'{base}/{ARGS["name"]}/scans/nxc')
+    create_dir(f'{base}/{ARGS["name"]}/scans/enum4linux')
+    create_dir(f'{base}/{ARGS["name"]}/scans/ldapsearch')
+    create_dir(f'{base}/{ARGS["name"]}/loot')
+    create_dir(f'{base}/{ARGS["name"]}/expl')
+    create_dir(f'{base}/{ARGS["name"]}/sandbox')
+    create_dir(f'{base}/{ARGS["name"]}/www')
+    create_dir(f'{base}/{ARGS["name"]}/access')
+
+    #
+    # Create files
+    #
+    open(f'{base}/{ARGS["name"]}/README.md', 'a').close()
 
 
 def update_zshrc() -> None:
@@ -58,7 +70,7 @@ def main() -> None:
         print('[E] Invalid parameters.')
         exit(1)
 
-    create_dirs()
+    create_directory_structure()
     update_zshrc()
 
 
